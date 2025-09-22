@@ -15,6 +15,8 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "element-plus": "^2.11.3",
     "monaco-editor": "^0.53.0",
     "monaco-editor-vue3": "^1.0.3",
     "pinia": "^3.0.3",
