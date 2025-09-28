@@ -1,0 +1,24 @@
+[
+  {
+    "id": "two-sum",
+    "title": "Two Sum",
+    "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. Assume exactly one solution and do not use the same element twice.",
+    "example": {
+      "input": "nums = [2,7,11,15], target = 9",
+      "output": "[0, 1]",
+      "explanation": "Because nums[0] + nums[1] == 9."
+    },
+    "referenceSolution": "def two_sum(nums, target)\n  seen = {}\n  nums.each_with_index do |num, idx|\n    complement = target - num\n    return [seen[complement], idx] if seen.key?(complement)\n    seen[num] = idx\n  end\nend"
+  },
+  {
+    "id": "valid-parentheses",
+    "title": "Valid Parentheses",
+    "description": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if every open bracket has a matching closing bracket in the correct order.",
+    "example": {
+      "input": "s = '()[]{}'",
+      "output": "true",
+      "explanation": "Each opening bracket is closed in the correct order."
+    },
+    "referenceSolution": "def valid_parentheses(s)\n  stack = []\n  pairs = { ')' => '(', ']' => '[', '}' => '{' }\n\n  s.each_char do |ch|\n    if pairs.values.include?(ch)\n      stack.push(ch)\n    elsif pairs.key?(ch)\n      return false if stack.empty? || stack.pop != pairs[ch]\n    end\n  end\n\n  stack.empty?\nend"
+  }
+]

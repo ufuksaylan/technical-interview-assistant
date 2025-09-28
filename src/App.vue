@@ -3,17 +3,14 @@ import CodeEditorWidget from '@/components/CodeEditorWidget.vue'
 import OutputWidget from '@/components/OutputWidget.vue'
 import ControlsWidget from '@/components/ControlsWidget.vue'
 import ChatWidget from '@/components/ChatWidget.vue'
+import QuestionWidget from '@/components/QuestionWidget.vue'
 </script>
 
 <template>
   <div class="app">
-    <header>
-      <h1>Technical Interview Assistant</h1>
-      <p>Ruby code editor with live execution powered by Judge0</p>
-    </header>
-
     <main class="main-layout">
       <section class="workspace-area">
+        <QuestionWidget />
         <ControlsWidget />
 
         <div class="workspace-grid">
@@ -38,27 +35,6 @@ import ChatWidget from '@/components/ChatWidget.vue'
   color: var(--el-text-color-primary);
   display: flex;
   flex-direction: column;
-}
-
-header {
-  padding: 2rem;
-  text-align: center;
-  background: var(--el-bg-color);
-  border-bottom: 1px solid var(--el-border-color);
-  box-shadow: var(--el-box-shadow-light);
-}
-
-header h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--el-text-color-primary);
-}
-
-header p {
-  margin: 0;
-  color: var(--el-text-color-regular);
-  font-size: 1.1rem;
 }
 
 .main-layout {
@@ -88,9 +64,6 @@ header p {
 }
 
 .side-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
   min-height: 0;
 }
 
@@ -112,24 +85,12 @@ header p {
 }
 
 @media (max-width: 768px) {
-  header {
-    padding: 1.5rem 1rem;
-  }
-
   .main-layout {
     padding: 1rem;
     gap: 1rem;
   }
 
-  .workspace-area {
-    gap: 1rem;
-  }
-
   .workspace-grid {
-    gap: 1rem;
-  }
-
-  .side-panel {
     gap: 1rem;
   }
 }

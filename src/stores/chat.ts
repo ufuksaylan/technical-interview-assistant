@@ -4,6 +4,7 @@ import { OpenAIService, createConversation } from '@/services/openai'
 import { loadPrompt } from '@/services/promptLoader'
 import { useCodeEditorStore } from '@/stores/codeEditor'
 import { useExecutionStore } from '@/stores/execution'
+import { useQuestionStore } from '@/stores/question'
 import type { ChatMessage } from '@/types/chat'
 import type { OpenAIRole } from '@/types/openai'
 
@@ -19,15 +20,22 @@ async function getSystemPrompt(): Promise<string> {
 }
 
 async function buildContextPrompt(): Promise<string> {
-  const [systemPrompt, codeEditorStore, executionStore] = [
+  const [systemPrompt, codeEditorStore, executionStore, questionStore] = [
     await getSystemPrompt(),
     useCodeEditorStore(),
     useExecutionStore(),
+    useQuestionStore(),
   ]
 
   const { code, language } = storeToRefs(codeEditorStore)
-  const { currentResult, lastExecution, totalExecutions, successfulExecutions, failedExecutions } =
-    storeToRefs(executionStore)
+  const {
+    currentResult,
+    lastExecution,
+    totalExecutions,
+    successfulExecutions,
+    failedExecutions,
+  } = storeToRefs(executionStore)
+  const { currentQuestion } = storeToRefs(questionStore)
 
   const latestResult = currentResult.value ?? lastExecution.value?.result
 
@@ -46,8 +54,14 @@ async function buildContextPrompt(): Promise<string> {
 
   const statsSummary = `Total runs: ${totalExecutions.value} (pass: ${successfulExecutions.value}, fail: ${failedExecutions.value})`
 
+  const questionSection = currentQuestion.value
+    ? [`Title: ${currentQuestion.value.title}`, `Source Language: ${currentQuestion.value.language}`, `Prompt:\n${currentQuestion.value.prompt}`].join('\n\n')
+    : 'A question has not been selected yet.'
+
   return [
     systemPrompt,
+    '--- Current Question ---',
+    questionSection,
     '--- Editor State ---',
     `Language: ${language.value}`,
     `Code:\n${code.value || '(empty)'}`,
@@ -81,7 +95,8 @@ export const useChatStore = defineStore('chat', () => {
     {
       id: generateId(),
       role: 'assistant',
-      content: 'Hi! I can help you prep for technical interviews. Ask me for hints, feedback, or walkthroughs.',
+      content:
+        'Hi! I can help you prep for technical interviews. Ask me for hints, feedback, or walkthroughs.',
       createdAt: now(),
     },
   ])
@@ -133,7 +148,8 @@ export const useChatStore = defineStore('chat', () => {
         createdAt: now(),
       })
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Something went wrong while contacting ChatGPT.'
+      const message =
+        error instanceof Error ? error.message : 'Something went wrong while contacting ChatGPT.'
       appendMessage({
         id: generateId(),
         role: 'error',
