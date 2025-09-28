@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { Judge0Service, LANGUAGE_IDS } from '@/services/judge0'
-import type { ExecutionResult } from '@/services/types'
+import type { ExecutionResult } from '@/types/judge0'
 
 export interface ExecutionHistory {
   id: string

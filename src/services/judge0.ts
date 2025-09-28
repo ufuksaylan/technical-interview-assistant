@@ -1,4 +1,4 @@
-import type { SubmissionRequest, Submission, Language, ExecutionResult } from './types'
+import type { SubmissionRequest, Submission, Language, ExecutionResult } from '@/types/judge0'
 
 const RAPIDAPI_HOST = import.meta.env.VITE_RAPIDAPI_HOST
 const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY

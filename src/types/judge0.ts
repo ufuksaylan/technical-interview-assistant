@@ -1,4 +1,3 @@
-// Judge0 API Types
 export interface Language {
   id: number
   name: string

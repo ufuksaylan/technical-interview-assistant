@@ -20,6 +20,21 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 npm install
 ```
 
+### Environment Variables
+
+Create a `.env.local` file in the project root and configure the required keys:
+
+```sh
+# Judge0 RapidAPI
+VITE_RAPIDAPI_HOST=your-rapidapi-host
+VITE_RAPIDAPI_KEY=your-rapidapi-key
+
+# OpenAI Responses API
+VITE_OPENAI_API_KEY=sk-...
+VITE_OPENAI_BASE_URL=https://api.openai.com/v1
+VITE_OPENAI_MODEL=gpt-3.5-turbo
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh

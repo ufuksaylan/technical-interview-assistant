@@ -3,6 +3,7 @@ import CodeEditorWidget from '@/components/CodeEditorWidget.vue'
 import InputWidget from '@/components/InputWidget.vue'
 import OutputWidget from '@/components/OutputWidget.vue'
 import ControlsWidget from '@/components/ControlsWidget.vue'
+import ChatWidget from '@/components/ChatWidget.vue'
 </script>
 
 <template>
@@ -12,16 +13,22 @@ import ControlsWidget from '@/components/ControlsWidget.vue'
       <p>Ruby code editor with live execution powered by Judge0</p>
     </header>
 
-    <main>
-      <ControlsWidget />
-      
-      <div class="workspace">
-        <CodeEditorWidget />
-        <div class="side-panel">
-          <InputWidget />
-          <OutputWidget />
+    <main class="main-layout">
+      <section class="workspace-area">
+        <ControlsWidget />
+
+        <div class="workspace-grid">
+          <CodeEditorWidget />
+          <div class="side-panel">
+            <InputWidget />
+            <OutputWidget />
+          </div>
         </div>
-      </div>
+      </section>
+
+      <aside class="chat-area">
+        <ChatWidget />
+      </aside>
     </main>
   </div>
 </template>
@@ -31,6 +38,8 @@ import ControlsWidget from '@/components/ControlsWidget.vue'
   min-height: 100vh;
   background: var(--el-bg-color-page);
   color: var(--el-text-color-primary);
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -54,40 +63,74 @@ header p {
   font-size: 1.1rem;
 }
 
-main {
-  padding: 1.5rem;
-  max-width: 1400px;
+.main-layout {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  width: 100%;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  gap: 1.75rem;
+  box-sizing: border-box;
+}
+
+.workspace-area {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 0;
 }
 
-.workspace {
+.workspace-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: 1.5rem;
-  height: calc(100vh - 240px);
+  height: 100%;
+  min-height: 460px;
 }
 
 .side-panel {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-height: 0;
 }
 
-@media (max-width: 768px) {
-  .workspace {
+.chat-area {
+  min-height: 0;
+}
+
+@media (max-width: 1200px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .workspace-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     height: auto;
   }
-  
-  main {
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1.5rem 1rem;
+  }
+
+  .main-layout {
     padding: 1rem;
     gap: 1rem;
   }
-  
+
+  .workspace-area {
+    gap: 1rem;
+  }
+
+  .workspace-grid {
+    gap: 1rem;
+  }
+
   .side-panel {
     gap: 1rem;
   }

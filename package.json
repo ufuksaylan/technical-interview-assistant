@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
+    "lint:types": "vue-tsc --noEmit",
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
