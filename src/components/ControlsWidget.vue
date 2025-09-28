@@ -57,8 +57,8 @@ const codeEditorStore = useCodeEditorStore()
 const executionStore = useExecutionStore()
 
 async function handleExecuteCode() {
-  const { code, stdin, language } = codeEditorStore.getEditorState()
-  await executionStore.executeCode(code, stdin, language)
+  const { code, language } = codeEditorStore.getEditorState()
+  await executionStore.executeCode(code, '', language)
 }
 </script>
 

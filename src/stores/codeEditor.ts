@@ -10,7 +10,6 @@ end
 
 puts hello`)
 
-  const stdin = ref('')
   const language = ref('ruby')
 
   const editorOptions = {
@@ -23,10 +22,6 @@ puts hello`)
   // Editor actions
   function setCode(newCode: string) {
     code.value = newCode
-  }
-
-  function setStdin(input: string) {
-    stdin.value = input
   }
 
   function setLanguage(newLanguage: string) {
@@ -62,37 +57,28 @@ console.log(hello());`
     updateCodeForLanguage(language.value)
   }
 
-  function clearStdin() {
-    stdin.value = ''
-  }
-
-  function getEditorState() {
+  function getEditorState(): { code: string; language: string } {
     return {
       code: code.value,
-      stdin: stdin.value,
-      language: language.value
+      language: language.value,
     }
   }
 
-  function restoreEditorState(state: { code: string; stdin: string; language: string }) {
+  function restoreEditorState(state: { code: string; language: string }) {
     code.value = state.code
-    stdin.value = state.stdin
     language.value = state.language
   }
 
   return {
     // State
     code,
-    stdin,
     language,
     editorOptions,
     
     // Actions
     setCode,
-    setStdin,
     setLanguage,
     resetCode,
-    clearStdin,
     getEditorState,
     restoreEditorState
   }

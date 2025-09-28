@@ -7,3 +7,4 @@ export interface ChatMessage {
   createdAt: Date
   pending?: boolean
 }
+

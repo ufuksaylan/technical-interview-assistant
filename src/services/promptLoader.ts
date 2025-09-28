@@ -16,3 +16,4 @@ export async function loadPrompt(path: string): Promise<PromptConfig> {
 
   return response.json()
 }
+

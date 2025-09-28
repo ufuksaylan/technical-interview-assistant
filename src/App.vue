@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CodeEditorWidget from '@/components/CodeEditorWidget.vue'
-import InputWidget from '@/components/InputWidget.vue'
 import OutputWidget from '@/components/OutputWidget.vue'
 import ControlsWidget from '@/components/ControlsWidget.vue'
 import ChatWidget from '@/components/ChatWidget.vue'
@@ -20,7 +19,6 @@ import ChatWidget from '@/components/ChatWidget.vue'
         <div class="workspace-grid">
           <CodeEditorWidget />
           <div class="side-panel">
-            <InputWidget />
             <OutputWidget />
           </div>
         </div>

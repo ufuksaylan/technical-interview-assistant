@@ -25,7 +25,7 @@ async function buildContextPrompt(): Promise<string> {
     useExecutionStore(),
   ]
 
-  const { code, stdin, language } = storeToRefs(codeEditorStore)
+  const { code, language } = storeToRefs(codeEditorStore)
   const { currentResult, lastExecution, totalExecutions, successfulExecutions, failedExecutions } =
     storeToRefs(executionStore)
 
@@ -51,7 +51,6 @@ async function buildContextPrompt(): Promise<string> {
     '--- Editor State ---',
     `Language: ${language.value}`,
     `Code:\n${code.value || '(empty)'}`,
-    `Stdin:\n${stdin.value || '(empty)'}`,
     '--- Execution Summary ---',
     statsSummary,
     executionSection,
